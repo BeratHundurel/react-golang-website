@@ -16,7 +16,7 @@ const accountLinks = [
 
 export default function Header() {
    return (
-      <div className="container header-container flex justify-between items-center py-8 px-6">
+      <header className="container header-container flex justify-between items-center py-8 px-6">
          <div className="header-brand w-40">
             <img src="/images/brand.png" alt="logo" className="object-cover w-full" />
          </div>
@@ -34,6 +34,6 @@ export default function Header() {
                <img src={src} alt={alt} className="w-5 h-auto" />
             ))}
          </div>
-      </div>
+      </header>
    );
 }
