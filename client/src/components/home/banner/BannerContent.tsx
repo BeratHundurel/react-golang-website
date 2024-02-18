@@ -8,7 +8,7 @@ export default function BannerContent() {
          <p className="text-neutral text-base font-medium">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis.
          </p>
-         <button className="w-1/3 py-4 px-3 flex justify-center items-center bg-primary font-semibold text-accent">
+         <button className="w-1/3 py-4 px-3 flex justify-center items-center bg-primary font-semibold text-white">
             Buy Now
          </button>
       </div>

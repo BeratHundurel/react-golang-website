@@ -3,56 +3,72 @@ import HomeProductCard from "./HomeProductCard";
 const products: product[] = [
    {
       id: 1,
-      name: "Product 1",
-      price: 100,
-      description: "Product 1 description",
-      image: "/images/product1.jpg",
+      name: "Syltherine",
+      price: 2500,
+      description: "Stylish desk",
+      image: "/images/product1.png",
    },
    {
       id: 2,
-      name: "Product 2",
-      price: 200,
-      description: "Product 2 description",
-      image: "/images/product2.jpg",
+      name: "Leviosa",
+      price: 2600,
+      description: "Stylish cafe chair",
+      image: "/images/product2.png",
    },
    {
       id: 3,
-      name: "Product 3",
-      price: 300,
-      description: "Product 3 description",
-      image: "/images/product3.jpg",
+      name: "Lolito",
+      price: 4000,
+      description: "Luxury big sofa",
+      image: "/images/product3.png",
    },
    {
       id: 4,
-      name: "Product 4",
-      price: 400,
-      description: "Product 4 description",
-      image: "/images/product4.jpg",
+      name: "Respira",
+      price: 3500,
+      description: "Outdoor bar table and stool",
+      image: "/images/product4.png",
    },
    {
       id: 5,
-      name: "Product 5",
-      price: 500,
-      description: "Product 5 description",
-      image: "/images/product5.jpg",
+      name: "Grifo",
+      price: 1200,
+      description: "Night lamp",
+      image: "/images/product5.png",
    },
    {
       id: 6,
-      name: "Product 6",
-      price: 600,
-      description: "Product 6 description",
-      image: "/images/product6.jpg",
+      name: "Muggo",
+      price: 3200,
+      description: "Small mug",
+      image: "/images/product6.png",
+   },
+   {
+      id: 7,
+      name: "Pingky",
+      price: 4500,
+      description: "Cute bed set",
+      image: "/images/product7.png",
+   },
+   {
+      id: 8,
+      name: "Potty",
+      price: 3600,
+      description: "Minimalist flower pot",
+      image: "/images/product8.png",
    },
 ];
 
 export default function HomeProducts() {
    return (
-      <section className="container mx-auto mt-24">
-         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <section className="contaier home-products-container mb-24 flex flex-col justify-center items-center">
+         <h1 className="lg:text-4xl text-3xl font-bold text-neutral mb-8">Our Products</h1>
+         <div className="flex flex-row flex-wrap w-11/12 justify-center items-center">
             {products.map((product) => (
                <HomeProductCard key={product.id} product={product} />
             ))}
          </div>
+         <button className="bg-white border-primary border-2 text-primary w-56 py-2 font-bold">Show More</button>
       </section>
    );
 }

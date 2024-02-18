@@ -9,6 +9,8 @@ export default {
             "neutral": "#333333",
             "success": "#2EC1AC",
             "error": "#E97171",
+            "white": "#FFFFFF",
+            "gray": "#898989",
         },
     },
     plugins: [],

@@ -31,7 +31,7 @@ export default function Header() {
          </div>
          <div className="header-account w-1/6 flex items-center justify-around">
             {accountLinks.map(({ src, alt }) => (
-               <img src={src} alt={alt} className="w-5 h-auto" />
+               <img src={src} alt={alt} key={alt} className="w-5 h-auto" />
             ))}
          </div>
       </header>
