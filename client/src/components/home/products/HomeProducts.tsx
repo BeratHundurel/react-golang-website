@@ -61,7 +61,7 @@ const products: product[] = [
 
 export default function HomeProducts() {
    return (
-      <section className="contaier home-products-container mb-24 flex flex-col justify-center items-center">
+      <section className="container home-products-container mb-24 flex flex-col justify-center items-center">
          <h1 className="lg:text-4xl text-3xl font-bold text-neutral mb-8">Our Products</h1>
          <div className="flex flex-row flex-wrap w-11/12 justify-center items-center">
             {products.map((product) => (
