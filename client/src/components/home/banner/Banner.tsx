@@ -6,7 +6,7 @@ export default function Banner() {
          <div className="banner">
             <img src="/images/banner.png" alt="banner" className="object-cover w-full h-full" />
          </div>
-         <div className="banner-content absolute top-1/3 left-1/2 w-5/12">
+         <div className="banner-content absolute top-1/3 lg:left-1/2 left-1/3 lg:w-5/12 w-6/12">
             <BannerContent />
          </div>
       </section>
