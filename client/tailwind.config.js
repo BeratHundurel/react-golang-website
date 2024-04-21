@@ -16,16 +16,18 @@ export default {
                 "primary-text": "#3A3A3A",
                 "secondary-text": "#616161",
             },
-            width:{
-                "100" : "400px",
+            width: {
+                "100": "400px",
                 "106": "424px",
                 "112": "448px",
             },
-            height:{
-                "100" : "400px",
+            height: {
+                "100": "400px",
                 "106": "424px",
                 "112": "448px",
             },
+            opacity: ['responsive', 'hover', 'focus', 'active', 'group-hover'],
+            transform: ['responsive', 'hover', 'focus', 'active', 'group-hover'],
         }
     },
     plugins: [],

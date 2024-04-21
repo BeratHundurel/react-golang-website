@@ -61,20 +61,22 @@ export default function Header() {
                   <span className="w-5 h-0.5 bg-primary"></span>
                </div>
             </div>
-            {isMenuOpen && (
-               <div className="mobile-menu w-2/3 h-screen bg-white fixed top-0 right-0 z-50 flex flex-col py-12 px-12">
-                  <div className="flex justify-end mb-6">
-                     <FontAwesomeIcon icon={faClose} onClick={toggleMenu} />
-                  </div>
-                  <ul className="flex flex-col gap-3 items-center">
-                     {midLinks.map(({ title, path }) => (
-                        <li key={path} className="text-neutral text-base font-semibold">
-                           <Link to={path}>{title}</Link>
-                        </li>
-                     ))}
-                  </ul>
+            <div
+               className={`w-2/3 h-screen bg-white fixed top-0 right-0 z-50 flex flex-col py-12 px-12 transform transition-transform duration-500 ease-out opacity-0 ${
+                  isMenuOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
+               }`}
+            >
+               <div className="flex justify-end mb-6">
+                  <FontAwesomeIcon icon={faClose} onClick={toggleMenu} />
                </div>
-            )}
+               <ul className="flex flex-col gap-4 items-end">
+                  {midLinks.map(({ title, path }) => (
+                     <li key={path} className="text-neutral text-lg font-semibold">
+                        <Link to={path}>{title}</Link>
+                     </li>
+                  ))}
+               </ul>
+            </div>
          </header>
       </>
    );
