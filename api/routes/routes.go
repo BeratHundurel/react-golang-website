@@ -1,0 +1,23 @@
+package routes
+
+import (
+	"net/http"
+
+	handlers "github.com/BeratHundurel/react-golang-ecommerce/handlers"
+	"github.com/go-chi/chi"
+	"github.com/go-chi/cors"
+)
+
+func SetRoutes() {
+	r := chi.NewRouter()
+	r.Use(cors.Handler(cors.Options{
+		AllowedOrigins:   []string{"https://*", "http://*"},
+		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
+		ExposedHeaders:   []string{"Link"},
+		AllowCredentials: true,
+	}))
+	r.Get("/", handlers.HomePage)
+	r.Post("/fetchProducts", handlers.FetchAllProducts)
+	http.ListenAndServe(":3000", r)
+}
