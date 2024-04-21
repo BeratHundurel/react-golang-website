@@ -6,10 +6,10 @@ import (
 )
 
 func GetProductList() ([]models.Product, error) {
-	var transactions []models.Product
-	err := data.DB.Select(&transactions, "SELECT * FROM Products")
+	var products []models.Product
+	err := data.DB.Select(&products, "SELECT * FROM Products")
 	if err != nil {
 		return nil, err
 	}
-	return transactions, nil
+	return products, nil
 }
