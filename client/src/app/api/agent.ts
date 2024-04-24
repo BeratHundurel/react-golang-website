@@ -1,5 +1,4 @@
 import { Product } from "../models/product";
-
 export const fetchProducts = async (): Promise<Product[]> => {
    const response = await fetch("http://localhost:3000/fetchProducts", {
       method: "POST",
@@ -10,6 +9,6 @@ export const fetchProducts = async (): Promise<Product[]> => {
    if (!response.ok) {
       throw new Error("Network response was not ok");
    }
-   const data = await response.json();
-   return data;
+   const products = await response.json();
+   return products;
 };

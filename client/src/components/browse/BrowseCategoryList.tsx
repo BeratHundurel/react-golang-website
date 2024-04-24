@@ -1,7 +1,7 @@
-import BrowseCategoryCard from "./BrowseCategoryCard";
-import { category } from "../../../app/models/category.ts";
+import BrowseCategoryCard from "./BrowseCategoryCard.tsx";
+import { Category } from "../../app/models/category.ts";
 
-const browseCard: category[] = [
+const browseCard: Category[] = [
    { src: "/images/Dining.png", title: "Dining" },
    { src: "/images/Living.png", title: "Living" },
    { src: "/images/Bedroom.png", title: "Bedroom" },

@@ -1,7 +1,7 @@
-import { category } from "../../../app/models/category.ts";
+import { Category } from "../../app/models/category.ts";
 
 interface Props {
-   browseCard: category; // Change to singular to reflect a single card
+   browseCard: Category; // Change to singular to reflect a single card
 }
 
 export default function BrowseCategoryCard({ browseCard }: Props) {
