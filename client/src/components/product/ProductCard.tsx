@@ -4,7 +4,7 @@ interface Props {
    product: Product; // Change to singular to reflect a single card
 }
 
-export default function HomeProductCard({ product }: Props) {
+export default function ProductCard({ product }: Props) {
    return (
       <div className="home-products-card w-full lg:w-1/4 px-4 mb-10">
          <img src={product.image} alt={product.name} className="w-full h-72 object-cover rounded-sm" />
