@@ -1,9 +1,11 @@
-import HomeProducts from "../../components/product/Products";
-
+import { useQuery } from "@tanstack/react-query";
+import Products from "../../components/product/Products";
+import { fetchProducts } from "../api/agent";
 export default function ProductPage() {
+   const { data } = useQuery({ queryKey: ["products"], queryFn: fetchProducts });
    return (
-      <section className="w-full product-page-section">
-         <HomeProducts title={""} button={false} />
-      </section>
+      <>
+         <Products title={""} button={false} products={data ?? []} />
+      </>
    );
 }

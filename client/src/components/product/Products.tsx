@@ -1,24 +1,20 @@
-import { useQuery } from "@tanstack/react-query";
-import { fetchProducts } from "../../app/api/agent";
 import ProductCard from "./ProductCard";
+import { Product } from "../../app/models/product";
 
 interface ProductsProps {
    title: string;
    button: boolean;
+   products: Product[];
 }
 
-export default function Products({ title, button }: ProductsProps) {
-   const { data, isLoading, isError } = useQuery({ queryKey: ["products"], queryFn: fetchProducts });
-
+export default function Products({ title, button, products }: ProductsProps) {
    return (
       <section className="container home-products-container mb-24 flex flex-col justify-center items-center">
          {title && <h1 className="lg:text-4xl text-3xl font-bold text-neutral mb-8">{title}</h1>}
-         {isLoading && <div>Loading...</div>}
-         {isError && <div>Error</div>}
-         {data && (
+         {products && (
             <>
                <div className="flex flex-row flex-wrap w-11/12 justify-center items-center">
-                  {data.map((product) => (
+                  {products.map((product) => (
                      <ProductCard key={product.id} product={product} />
                   ))}
                </div>
