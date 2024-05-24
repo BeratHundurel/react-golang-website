@@ -1,7 +1,7 @@
-import { Product } from "../../app/models/product";
+import { ViewProductCategory } from "../../app/models/ViewProductCategory.";
 
 interface Props {
-   product: Product; // Change to singular to reflect a single card
+   product: ViewProductCategory; // Change to singular to reflect a single card
 }
 
 export default function ProductCard({ product }: Props) {

@@ -1,10 +1,10 @@
 import ProductCard from "./ProductCard";
-import { Product } from "../../app/models/product";
+import { ViewProductCategory } from "../../app/models/ViewProductCategory.";
 
 interface ProductsProps {
    title: string;
    button: boolean;
-   products: Product[];
+   products: ViewProductCategory[];
 }
 
 export default function Products({ title, button, products }: ProductsProps) {
@@ -15,7 +15,7 @@ export default function Products({ title, button, products }: ProductsProps) {
             <>
                <div className="flex flex-row flex-wrap w-11/12 justify-center items-center">
                   {products.map((product) => (
-                     <ProductCard key={product.id} product={product} />
+                     <ProductCard key={product.productId} product={product} />
                   ))}
                </div>
                {button && <button className="bg-white border-primary border-2 text-primary w-56 py-2 font-bold">Show More</button>}

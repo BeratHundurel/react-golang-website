@@ -5,5 +5,5 @@ CREATE TABLE Products (
     Price DECIMAL(10, 2),
     Quantity INT,
     Image VARCHAR(255),
-    Category VARCHAR(255)
 );
+
