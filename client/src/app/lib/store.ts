@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { Product } from "../models/Product";
+import { Product } from "../models/product";
 
 export type ProductState = {
    products: Product[];

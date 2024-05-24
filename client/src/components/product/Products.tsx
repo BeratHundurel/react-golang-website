@@ -15,7 +15,7 @@ export default function Products({ title, button, products }: ProductsProps) {
             <>
                <div className="flex flex-row flex-wrap w-11/12 justify-center items-center">
                   {products.map((product) => (
-                     <ProductCard key={product.productId} product={product} />
+                     <ProductCard product={product} />
                   ))}
                </div>
                {button && <button className="bg-white border-primary border-2 text-primary w-56 py-2 font-bold">Show More</button>}

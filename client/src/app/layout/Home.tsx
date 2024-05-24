@@ -4,15 +4,12 @@ import BrowseCategory from "../../components/browse/BrowseCategory";
 import Products from "../../components/product/Products";
 import Room from "../../components/room/Room";
 import { fetchProducts } from "../api/agent";
+import { getUniqueProducts, shuffle } from "../lib/util";
 
 export default function Home() {
    const { data } = useQuery({ queryKey: ["products"], queryFn: fetchProducts });
-   const products = data
-      ? data
-           .slice()
-           .sort(() => Math.random() - 0.5)
-           .slice(0, 8)
-      : [];
+   let products = getUniqueProducts(data ?? []);
+   products = shuffle(products);
    return (
       <>
          <Banner />
