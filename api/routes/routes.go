@@ -17,6 +17,7 @@ func SetRoutes() {
 		ExposedHeaders:   []string{"Link"},
 		AllowCredentials: true,
 	}))
-	r.Post("/fetchProducts", handlers.FetchAllProducts)
+	r.Get("/fetchProducts", handlers.FetchAllProducts)
+	r.Get("/fetchCategories", handlers.FetchAllCategories)
 	http.ListenAndServe(":3000", r)
 }

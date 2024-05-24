@@ -1,7 +1,7 @@
 import { ViewProductCategory } from "../models/ViewProductCategory.";
 export const fetchProducts = async (): Promise<ViewProductCategory[]> => {
    const response = await fetch("http://localhost:3000/fetchProducts", {
-      method: "POST",
+      method: "GET",
       headers: {
          "Content-Type": "application/json",
       },
