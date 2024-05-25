@@ -14,7 +14,7 @@ export default function Home() {
       <>
          <Banner />
          <BrowseCategory />
-         <Products title={"Our Products"} button={true} products={products ?? []} />
+         <Products title={"Our Products"} button={true} products={products ?? []} width="w-full" />
          <Room />
       </>
    );

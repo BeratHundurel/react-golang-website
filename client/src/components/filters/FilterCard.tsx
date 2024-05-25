@@ -1,16 +1,20 @@
-import { Category } from "../../app/models/category";
+import { useProductStore } from "../../app/lib/store";
+import { Category } from "../../app/models/Category";
 
 interface FilterCardProps {
    category: Category;
 }
 
 export default function FilterCard({ category }: FilterCardProps) {
+   const { filterProductsByCategoryId } = useProductStore();
+   const handleClick = () => {
+      filterProductsByCategoryId(category.id);
+   };
    return (
-      <>
-         <div className="flex items-center mt-5">
-            <input type="checkbox" className="mr-2" />
-            <p className="text-base font-medium">{category.name}</p>
-         </div>
-      </>
+      <li className="inline-block mt-0 mr-2 mb-3 ml-0" key={category.id}>
+         <p className="inline-block bg-accent text-sm rounded-3xl py-3 px-3" onClick={handleClick} role="button">
+            {category.name}
+         </p>
+      </li>
    );
 }

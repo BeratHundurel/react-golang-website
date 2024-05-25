@@ -1,5 +1,5 @@
 import { ViewProductCategory } from "../models/ViewProductCategory.";
-import { Category } from "../models/category";
+import { Category } from "../models/Category";
 export const fetchProducts = async (): Promise<ViewProductCategory[]> => {
    const response = await fetch("http://localhost:3000/fetchProducts", {
       method: "POST",
@@ -26,4 +26,18 @@ export const fetchCategories = async (): Promise<Category[]> => {
     }
     const categories = await response.json();
     return categories;
+}
+
+export const fetchProductsByCategoryId = async (category_id: number): Promise<ViewProductCategory[]> => {
+    const response = await fetch(`http://localhost:3000/products?category_id=${category_id}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+    if (!response.ok) {
+        throw new Error("Network response was not ok");
+    }
+    const products = await response.json();
+    return products;
 }

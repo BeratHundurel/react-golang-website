@@ -17,7 +17,9 @@ func GetCategoryList() (<-chan []models.Categories, <-chan error) {
 			return
 		}
 		categoriesCh <- categories
+		close(categoriesCh)
 	}()
 
 	return categoriesCh, errCh
 }
+
