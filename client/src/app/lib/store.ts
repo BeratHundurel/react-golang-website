@@ -1,8 +1,9 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { ViewProductCategory } from "../models/ViewProductCategory.";
-import { fetchProductsByCategoryId } from "../api/agent";
+import { fetchProductsByCategoryId, fetchProductsBySearch } from "../api/agent";
 import { Category } from "../models/Category";
+import { getUniqueProducts } from "./util";
 
 export type ProductState = {
    products: ViewProductCategory[];
@@ -15,6 +16,7 @@ export type CategoryState = {
 export type ProductActions = {
    setProducts: (products: ViewProductCategory[]) => void;
    filterProductsByCategoryId: (category_id: number) => Promise<void>;
+   filterProductsBySearch: (search: string) => Promise<void>;
 };
 
 export type CategoryActions = {
@@ -29,6 +31,15 @@ export const useProductStore = create<ProductState & ProductActions>()(
          filterProductsByCategoryId: async (category_id: number) => {
             try {
                const filteredProducts = await fetchProductsByCategoryId(category_id);
+               set({ products: filteredProducts });
+            } catch (error) {
+               console.error("Error fetching products:", error);
+            }
+         },
+         filterProductsBySearch: async (search: string) => {
+            try {
+               let filteredProducts = await fetchProductsBySearch(search);
+               filteredProducts = getUniqueProducts(filteredProducts);
                set({ products: filteredProducts });
             } catch (error) {
                console.error("Error fetching products:", error);

@@ -6,7 +6,7 @@ import { Category } from "../../app/models/Category";
 export default function FilterCards() {
    const { data } = useQuery({ queryKey: ["categories"], queryFn: fetchCategories });
    return (
-      <ul>
+      <ul className="w-4/5">
          {data?.map((category: Category) => (
             <FilterCard category={category} key={category.id} />
          ))}

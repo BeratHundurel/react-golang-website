@@ -17,6 +17,7 @@ export default {
                 "secondary-text": "#616161",
             },
             width: {
+                "0.5": "2px",
                 "100": "400px",
                 "106": "424px",
                 "112": "448px",

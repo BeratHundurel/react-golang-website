@@ -9,14 +9,13 @@ interface FilterCardProps {
 export default function FilterCard({ category }: FilterCardProps) {
    const { filterProductsByCategoryId } = useProductStore();
    const { category: selectedCategory, setCategory } = useCategoryStore();
-
    const handleClick = useCallback(() => {
       filterProductsByCategoryId(category.id);
       setCategory(category);
    }, [category, filterProductsByCategoryId, setCategory]);
 
    useEffect(() => {
-      if (selectedCategory != null) {
+      if (selectedCategory != null && selectedCategory.id !== undefined) {
          filterProductsByCategoryId(selectedCategory.id);
       }
    }, [selectedCategory, filterProductsByCategoryId]);

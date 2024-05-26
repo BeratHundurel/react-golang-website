@@ -19,9 +19,9 @@ export default function ProductPage() {
    if (isLoading) return <div>Loading...</div>;
 
    return (
-      <section className="container flex flex-row justify-center px-24">
+      <section className="container flex flex-row justify-center px-24 min-h-svh py-12">
          <Filters />
-         <Products title={""} button={false} products={products} width="w-4/5" />
+         <Products title={""} button={false} products={products} width="w-3/4" />
       </section>
    );
 }

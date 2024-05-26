@@ -10,7 +10,7 @@ interface ProductsProps {
 
 export default function Products({ title, button, products, width }: ProductsProps) {
    return (
-      <div className={`flex flex-col mb-24 px-12 justify-center items-center ${width}`}>
+      <div className={`flex flex-col mb-24 px-12 items-center ${width}`}>
          {title && <h1 className="lg:text-4xl text-3xl font-bold text-neutral mb-8">{title}</h1>}
          {products && (
             <>

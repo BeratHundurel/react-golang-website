@@ -1,27 +1,14 @@
 package handlers
 
 import (
-	"encoding/json"
+	"github.com/BeratHundurel/react-golang-ecommerce/services"
 	"net/http"
 	"strconv"
-
-	"github.com/BeratHundurel/react-golang-ecommerce/services"
 )
 
 func FetchAllProducts(w http.ResponseWriter, r *http.Request) {
 	productsCh, errCh := services.GetProductList()
-	select {
-	case products := <-productsCh:
-		productJSON, err := json.Marshal(products)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
-		w.Header().Set("Content-Type", "application/json")
-		w.Write(productJSON)
-	case err := <-errCh:
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
+	services.HandleProductCases(productsCh, errCh, w)
 }
 
 func FetchProductsByCategoryId(w http.ResponseWriter, r *http.Request) {
@@ -31,18 +18,12 @@ func FetchProductsByCategoryId(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-
 	productsCh, errCh := services.GetProductsByCategoryId(categoryId)
-	select {
-	case products := <-productsCh:
-		productJSON, err := json.Marshal(products)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
-		w.Header().Set("Content-Type", "application/json")
-		w.Write(productJSON)
-	case err := <-errCh:
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
+	services.HandleProductCases(productsCh, errCh, w)
+}
+
+func FetchProductsBySearch(w http.ResponseWriter, r *http.Request) {
+	search := r.URL.Query().Get("search")
+	productsCh, errCh := services.GetProductsBySearch(search)
+	services.HandleProductCases(productsCh, errCh, w)
 }
