@@ -1,10 +1,10 @@
 import BrowseCategoryCard from "./BrowseCategoryCard.tsx";
-import { Category } from "../../app/models/category";
+import { Category } from "../../app/models/Category";
 
 const browseCard: Category[] = [
-   { id: 2, ımage: "/images/Dining.png", name: "Dining" },
-   { id: 1, ımage: "/images/Living.png", name: "Living" },
-   { id: 3, ımage: "/images/Bedroom.png", name: "Bedroom" },
+   { id: 2, image: "/images/Dining.png", name: "Dining" },
+   { id: 1, image: "/images/Living.png", name: "Living" },
+   { id: 3, image: "/images/Bedroom.png", name: "Bedroom" },
 ];
 
 export default function BrowseCategoryList() {
