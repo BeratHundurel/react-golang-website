@@ -1,5 +1,5 @@
 package models
-type User struct{
+type AppUser struct{
 	Id int `db:"Id" json:"id"`
 	FirstName string `db:"FirstName" json:"firstName"`
 	LastName string `db:"LastName" json:"lastName"`
