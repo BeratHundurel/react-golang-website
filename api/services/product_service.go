@@ -75,3 +75,12 @@ func HandleProductCases(product <-chan []models.ViewCategoryProduct, err <-chan 
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 }
+
+func GetProductById(productId int) (models.Product, error) {
+	var product models.Product
+	err := data.DB.Get(&product, "SELECT * FROM Products WHERE Id = @productId", sql.Named("productId", productId))
+	if err != nil {
+		return models.Product{}, err
+	}
+	return product, nil
+}

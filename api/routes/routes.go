@@ -19,6 +19,7 @@ func SetRoutes() {
 	}))
 	r.Post("/fetchProducts", handlers.FetchAllProducts)
 	r.Post("/fetchCategories", handlers.FetchAllCategories)
+	r.Post("/manageBasket", handlers.ManageBasket )
 	r.Get("/filterByCategory", handlers.FetchProductsByCategoryId)
 	r.Get("/filterBySearch", handlers.FetchProductsBySearch)
 	http.ListenAndServe(":3000", r)
