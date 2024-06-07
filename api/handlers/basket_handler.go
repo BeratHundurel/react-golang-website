@@ -1,62 +1,41 @@
 package handlers
 
 import (
+	"encoding/gob"
 	"encoding/json"
-	"net/http"
-
 	"github.com/BeratHundurel/react-golang-ecommerce/models"
 	"github.com/BeratHundurel/react-golang-ecommerce/services"
+	"net/http"
 )
 
 func ManageBasket(w http.ResponseWriter, r *http.Request) {
 	var request services.AddToBasketRequest
+
+	gob.Register(models.Basket{})
+	gob.Register([]models.BasketItem{})
+
 	err := json.NewDecoder(r.Body).Decode(&request)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 
-	cookie, err := r.Cookie("basket")
-	if err != nil || cookie.Value == "" {
+	cookie, err := services.GetBasketFromCookie(r)
+	if err != nil {
 		basket, err := services.CreateBasket(request)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
-		basketJson, err := json.Marshal(basket)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
-		cookie := http.Cookie{
-			Name:  "basket",
-			Value: string(basketJson),
-			Path:  "/",
-		}
-		http.SetCookie(w, &cookie)
+		services.SetBasketCookie(w, basket)
 	} else {
 		var basket models.Basket
-		err := json.Unmarshal([]byte(cookie.Value), &basket)
+		basket, err = services.UpdateBasket(cookie, request)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
-		basket, err = services.UpdateBasket(basket, request)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
-		basketJson, err := json.Marshal(basket)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
-		cookie := http.Cookie{
-			Name:  "basket",
-			Value: string(basketJson),
-			Path:  "/",
-		}
-		http.SetCookie(w, &cookie)
+		services.SetBasketCookie(w, basket)
 		w.WriteHeader(http.StatusOK)
 	}
 }

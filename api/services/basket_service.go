@@ -13,6 +13,11 @@ type AddToBasketRequest struct {
 	Quantity  int `json:"quantity"`
 }
 
+// CreateBasket creates a new basket for a user and adds a product to it.
+// It takes an AddToBasketRequest as input and returns a models.Basket and an error.
+// The AddToBasketRequest contains the product ID, user ID, and quantity.
+// If the product ID or user ID is invalid, it returns an empty models.Basket and an error.
+// If the basket creation or insertion of the basket item fails, it returns an empty models.Basket and an error.
 func CreateBasket(request AddToBasketRequest) (models.Basket, error) {
 	product, err := GetProductById(request.ProductId)
 	if err != nil {
@@ -34,12 +39,15 @@ func CreateBasket(request AddToBasketRequest) (models.Basket, error) {
 	return basket, nil
 }
 
+// UpdateBasket updates the given basket with the provided request.
+// It checks if the basket already contains an item with the same product ID.
+// If it does, it updates the existing item with the new request.
+// If it doesn't, it inserts a new item into the basket based on the request.
+// The updated basket is returned along with any error that occurred during the update process.
 func UpdateBasket(basket models.Basket, request AddToBasketRequest) (models.Basket, error) {
 	basketItem := GetBasketItemByBasketIdAndProductId(basket.Id, request.ProductId)
 	if basketItem.Id != 0 {
-		basketItem.Quantity += request.Quantity
-		basketItem.Total = basketItem.Price * float64(basketItem.Quantity)
-		_, err := data.DB.Exec("UPDATE BasketItem SET Quantity = @Quantity, Total = @Total WHERE Id = :Id", sql.Named("Quantity", basketItem.Quantity), sql.Named("Total", basketItem.Total), sql.Named("Id", basketItem.Id))
+		err := updateBasketItem(basketItem, request)
 		if err != nil {
 			return models.Basket{}, err
 		}
@@ -54,6 +62,18 @@ func UpdateBasket(basket models.Basket, request AddToBasketRequest) (models.Bask
 		}
 	}
 	return basket, nil
+}
+
+// updateBasketItem updates the quantity and total price of a basket item based on the provided request.
+// It takes a basket item and an AddToBasketRequest as parameters and returns an error if any.
+func updateBasketItem(basketItem models.BasketItem, request AddToBasketRequest) error {
+	basketItem.Quantity += request.Quantity
+	basketItem.Total = basketItem.Price * float64(basketItem.Quantity)
+	_, err := data.DB.Exec("UPDATE BasketItem SET Quantity = @Quantity, Total = @Total WHERE Id = @Id", sql.Named("Quantity", basketItem.Quantity), sql.Named("Total", basketItem.Total), sql.Named("Id", basketItem.Id))
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 // insertBasket inserts a new basket into the database for the given user with the specified price and quantity.
@@ -102,6 +122,8 @@ func insertBasketItem(basket models.Basket, product models.Product, request AddT
 	return nil
 }
 
+// GetBasketItemByBasketIdAndProductId retrieves a basket item from the database based on the given basket ID and product ID.
+// If the basket item is found, it is returned. Otherwise, an empty basket item is returned.
 func GetBasketItemByBasketIdAndProductId(basketId int, productId int) models.BasketItem {
 	basketItem := models.BasketItem{}
 	err := data.DB.Get(&basketItem, "SELECT * FROM BasketItem WHERE BasketId = @BasketId AND ProductId = @ProductId", sql.Named("BasketId", basketId), sql.Named("ProductId", productId))

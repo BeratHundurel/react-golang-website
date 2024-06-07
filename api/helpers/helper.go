@@ -1,6 +1,8 @@
 package helpers
 
-import "database/sql"
+import (
+	"database/sql"
+)
 
 func IntToNullInt64(value int64) sql.NullInt64 {
 	if value == 0 {
